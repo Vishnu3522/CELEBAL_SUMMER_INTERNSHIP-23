@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 import "./Login.css"
  
@@ -9,6 +8,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [welcome, setWelcome] = useState('');
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -33,10 +33,14 @@ function Login() {
     // Email is valid, proceed with login
     console.log(`Logged in with email: ${email} and name: ${name}`);
     alert(`Logged in with email: ${email} and name: ${name}`);
+    setWelcome(`hello!!   ${name}`);
+    setEmail('');
+    setName('');
   };
 
   return (
     <>
+     <h2><FontAwesomeIcon className='icon' icon={faUser} />{welcome}</h2>
       <div className="login-container">
         <h1>Login</h1>
         <hr />
@@ -49,8 +53,7 @@ function Login() {
                 id="email"
                 value={email}
                 onChange={handleEmailChange}
-              />
-               <FontAwesomeIcon className='icon' icon={faUser} />
+                required/>
 
             </div>
             {emailError && <p className="error">{emailError}</p>}
@@ -63,8 +66,7 @@ function Login() {
                 id="name"
                 value={name}
                 onChange={handleNameChange}
-              />
-              <FontAwesomeIcon icon={faLock} />
+                required/>
             </div>
           </div>
           <button
